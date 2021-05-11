@@ -2,17 +2,18 @@
     <div class="hello">
         <h1>Na hallo: {{ msg }}</h1>
         <p>{{ text }}</p>
-        <!-- hier Text-Component plazieren -->
-        <Test title="das ist die Test-Komponente" />
+        <Test title="das ist die Test-Komponente"/>
     </div>
 </template>
 
 <script>
+/* eslint-disable */
 import Test from "./Test";
+
 export default {
     name: 'HelloWorld',
     components: {Test},
-    props: ['msg','text'],
+    props: ['msg', 'text'],
     /*
       props: {
         msg: String
