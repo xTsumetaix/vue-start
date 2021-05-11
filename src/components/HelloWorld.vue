@@ -2,17 +2,18 @@
     <div class="hello">
         <h1>Na hallo: {{ msg }}</h1>
         <p>{{ text }}</p>
-        <Test title="das ist die Test-Komponente"/>
+        <Default msg="jetzt kommts du über WelcomeWorld"/>
     </div>
 </template>
 
 <script>
 /* eslint-disable */
 import Test from "./Test";
+import Default from "./Default";
 
 export default {
     name: 'HelloWorld',
-    components: {Test},
+    components: {Default, Test},
     props: ['msg', 'text'],
     /*
       props: {
