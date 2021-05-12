@@ -1,44 +1,45 @@
 <template>
-    <div class="hello">
-        <h1>Na hallo: {{ msg }}</h1>
-        <p>{{ text }}</p>
-        <Test title="das ist die Test-Komponente"/>
-    </div>
+  <div class="hello">
+    <h1>Na hallo: {{ msg }}</h1>
+    <p>{{ text }}</p>
+    <Default msg="jetzt kommst du über WelcomeWorld!" />
+  </div>
 </template>
 
 <script>
 /* eslint-disable */
 import Test from "./Test";
+import Default from "./Default";
 
 export default {
-    name: 'HelloWorld',
-    components: {Test},
-    props: ['msg', 'text'],
-    /*
-      props: {
-        msg: String
-      }
-    */
+  name: 'HelloWorld',
+  components: {Default, Test},
+  props: ['msg', 'text'],
+  /*
+    props: {
+      msg: String
+    }
+  */
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
-    margin: 40px 0 0;
+  margin: 40px 0 0;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 li {
-    display: inline-block;
-    margin: 0 10px;
+  display: inline-block;
+  margin: 0 10px;
 }
 
 a {
-    color: #42b983;
+  color: #42b983;
 }
 </style>
