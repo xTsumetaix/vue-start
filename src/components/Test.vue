@@ -1,7 +1,8 @@
 <template>
     <div class="">
         <h1>{{ title }}</h1>
-        <p>{{ firstname }} {{ lastname }}</p>
+        <!--p>{{ firstname }} {{ lastname }}</p-->
+        <p>{{ name }}</p>
         <p v-if="testVar === 1">Wert ist eins</p>
         <p v-else>Wert ist nicht 1</p>
         <ul>
@@ -35,13 +36,21 @@ export default {
         return {
             testVar: "Paul",
             persons: [],
-            firstname: null,
-            lastname: null,
+            firstname: "",
+            lastname: "",
             person: {
-                firstname: null,
-                lastname: null,
+                firstname: "",
+                lastname: "",
             }
         }
+    },
+    computed: {
+        // klassisches js
+        name: function () {
+            return this.firstname + " " + this.lastname
+        },
+        // ES6
+//        name: () => this.firstname + " " + this.lastname
     },
     methods: {
         addPerson(vorname, nachname) {
