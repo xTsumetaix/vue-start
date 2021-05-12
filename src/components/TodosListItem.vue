@@ -3,7 +3,12 @@
         <b-form>
             <input type="checkbox" v-model="item.done" />
 
-            <span :class="{'done': item.done}">{{ item.text }}</span>
+            <span
+                :class="{'done': item.done}"
+                @click="handleInfo(item)"
+            >
+                {{ item.text }}
+            </span>
 
             <b-button
                 @click="handleRemove(item)"
@@ -24,6 +29,9 @@ export default {
             required: true,
         },
         handleRemove: {
+            type: Function,
+        },
+        handleInfo: {
             type: Function,
         }
     },

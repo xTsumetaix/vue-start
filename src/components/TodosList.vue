@@ -1,28 +1,34 @@
 <template>
     <div>
         <!-- @todo: add TodoListAddItem -->
+        <TodosListItemAdd :handle-add="add" />
         <ul v-if="todos.length > 0">
             <TodosListItem
                 v-for="item in todos"
                 :key="item.id"
                 :item="item"
                 :handleRemove="remove"
+                :handleInfo="info"
             />
         </ul>
         <h3 v-else>Keine Daten vorhanden</h3>
         <!-- @todo: add TodoListItemInfo -->
+        <TodosListItemInfo v-if="todoData" :todo-data="todoData" />
     </div>
 </template>
 
 <script>
 import TodosListItem from "./TodosListItem";
+import TodosListItemAdd from "./TodosListItemAdd";
+import TodosListItemInfo from "./TodosListItemInfo";
 
 export default {
     name: "TodosList",
-    components: {TodosListItem},
+    components: {TodosListItemInfo, TodosListItemAdd, TodosListItem},
     data() {
         return {
             todos: [],
+            todoData: null,
         }
     },
     created() {
@@ -43,16 +49,22 @@ export default {
             if(!confirm("Todo: \"" + todo.text + "\" wirklich löschen?")) {
                 return
             }
-/*
-            // klassisch js
-            this.todos = this.todos.filter(function (item) {
-                if(item != todo) {
-                    return item
-                }
-            })
-*/
             // ES6 syntax
+            if(todo === this.todoData) {
+                this.todoData = null
+            }
             this.todos = this.todos.filter(item => item !== todo)
+        },
+        add(txt) {
+            let todo = {
+                id: Math.random(),
+                done: false,
+                text: txt,
+            }
+            this.todos.push(todo)
+        },
+        info(todo) {
+            this.todoData = todo
         },
     }
 }
