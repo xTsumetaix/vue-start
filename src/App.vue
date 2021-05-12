@@ -7,7 +7,9 @@
             |
             <router-link to="/about">About</router-link>
         </div>
-        <router-view/>
+        <div class="container align-content-center">
+            <router-view/>
+        </div>
     </div>
 </template>
 
