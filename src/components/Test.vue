@@ -49,8 +49,6 @@ export default {
         name: function () {
             return this.firstname + " " + this.lastname
         },
-        // ES6
-//        name: () => this.firstname + " " + this.lastname
     },
     methods: {
         addPerson(vorname, nachname) {
