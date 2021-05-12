@@ -7,6 +7,10 @@
         <ul>
             <li v-for="(item, index) in persons" :key="index">
                 {{ item.firstname }} {{ item.lastname }}
+                <b-button class="btn-sm ml-2" @click="removePerson(index)">
+                    <font-awesome-icon icon="trash-alt" class="mr-1"/>
+                    Löschen
+                </b-button>
             </li>
         </ul>
         <b-form>
@@ -48,6 +52,9 @@ export default {
             console.info(this.person)
             this.persons.push(this.person)
         },
+        removePerson(index) {
+            this.persons.splice(index, 1)
+        }
     }
 }
 </script>
