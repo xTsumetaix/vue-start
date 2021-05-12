@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- add TodoListAddItem -->
+        <!-- @todo: add TodoListAddItem -->
         <ul v-if="todos.length > 0">
             <TodosListItem
                 v-for="item in todos"
@@ -10,7 +10,7 @@
             />
         </ul>
         <h3 v-else>Keine Daten vorhanden</h3>
-        <!-- add TodoListItemInfo -->
+        <!-- @todo: add TodoListItemInfo -->
     </div>
 </template>
 
