@@ -7,7 +7,7 @@
       <ul>
     <li v-for="(item, index) in persons" :key="index">
       {{ item.firstName }} {{ item.lastName }}
-      <b-button class="btn-sm" @click="removePerson(index)">
+      <b-button class="btn-sm ml-2" @click="removePerson(index)">
         <font-awesome-icon icon="trash-alt" class="mr-1" />
         Löschen
       </b-button>
