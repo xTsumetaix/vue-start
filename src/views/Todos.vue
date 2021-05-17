@@ -1,18 +1,18 @@
 <template>
     <div class="todos">
-        <header>
+        <div>
             <TodosHeader />
-        </header>
+        </div>
         <main class="row">
             <TodosList class="col-9" />
             <div class="col-3">
-                <TodosListNotDone />
+                <TodosListDone :is-done="false" />
                 <TodosListDone />
             </div>
         </main>
-        <footer>
+        <div>
             <TodosFooter />
-        </footer>
+        </div>
     </div>
 </template>
 
@@ -25,7 +25,7 @@ import TodosListDone from "../components/TodosListDone";
 
 export default {
     name: "Todos",
-    components: {TodosListDone, TodosListNotDone, TodosList, TodosFooter, TodosHeader}
+    components: {TodosListDone, TodosList, TodosFooter, TodosHeader}
 }
 </script>
 
