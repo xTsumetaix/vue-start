@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Test from "../components/Test";
 import Default from "../components/Default";
-import TodosList from "../components/TodosList";
+import TodosPage from "../views/TodosPage";
+import LoginPage from "../views/LoginPage";
 
 Vue.use(VueRouter)
 
@@ -21,7 +22,12 @@ const routes = [
 	{
 		path: '/todos',
 		name: 'Todos',
-		component: TodosList
+		component: TodosPage
+	},
+	{
+		path: '/login',
+		name: 'Login',
+		component: LoginPage
 	},
 	{
 		path: '/about',
