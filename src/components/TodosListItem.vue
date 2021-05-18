@@ -8,6 +8,7 @@
             >
             <span>
                 <input
+                    type="text"
                     :class="{'done': item.done}"
                     @click="displayInfo(item.id)"
                     @change="updateTodo(item)"

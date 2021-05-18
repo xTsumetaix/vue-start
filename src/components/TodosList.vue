@@ -1,16 +1,24 @@
 <template>
     <div>
         <TodosListItemAdd :add-todo="addTodos"/>
-        <ul v-if="todos.length > 0">
-            <TodosListItem
-                v-for="item in todos"
-                :key="item.id"
-                :displayInfo="displayInfo"
-                @removeTodo="remove"
-                :item="item"
-                :updateTodo="updateTodo"/>
-        </ul>
-        <h3 v-else>Keine Daten vorhanden!</h3>
+        <div class="row">
+            <div class="col">
+                <ul v-if="todos.length > 0">
+                    <TodosListItem
+                        v-for="item in todos"
+                        :key="item.id"
+                        :displayInfo="displayInfo"
+                        @removeTodo="remove"
+                        :item="item"
+                        :updateTodo="updateTodo"/>
+                </ul>
+                <h3 v-else>Keine Daten vorhanden!</h3>
+            </div>
+            <div class="col">
+                <TodosListDone :todos="todos" />
+                <TodosListDone :todos="todos" :is-done="false"/>
+            </div>
+        </div>
         <TodosListItemInfo :todo="item"/>
     </div>
 </template>
@@ -20,10 +28,11 @@
 import TodosListItem from "./TodosListItem";
 import TodosListItemAdd from "./TodosListItemAdd";
 import TodosListItemInfo from "./TodosListItemInfo";
+import TodosListDone from "./TodosListDone";
 
 export default {
     name: "TodosList",
-    components: {TodosListItemInfo, TodosListItemAdd, TodosListItem},
+    components: {TodosListDone, TodosListItemInfo, TodosListItemAdd, TodosListItem},
     data() {
         return {
             todos: [],
