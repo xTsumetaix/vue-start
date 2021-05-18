@@ -1,29 +1,31 @@
 <template>
   <div>
+    <TodosListItemAdd :add-todo="addTodos" />
     <ul v-if="todos.length > 0">
-      <li v-for="item in todos" :key="item.id">
-        <input type="checkbox" v-model="item.done">
-        <span :class="{'done': item.done}">{{ item.text}}</span>
-
-<!--        <input v-if="item.done === 1" type="checkbox" checked />-->
-<!--        <input v-else type="checkbox" />-->
-        <b-button
-            class="btn-sm btn-danger float-right del"
-        >
-          <font-awesome-icon icon="trash-alt"/>
-        </b-button>}}
-      </li>
+      <TodosListItem
+          v-for="item in todos"
+          :key="item.id"
+          :item="item"
+          :handleRemove="remove"
+          :displayInfo="displayInfo"
+          :updateTodo="updateTodo"/>
     </ul>
     <h3 v-else>Keine Daten vorhanden!</h3>
+    <TodosListItemInfo :todo="item" />
   </div>
 </template>
 
 <script>
+import TodosListItem from "./TodosListItem";
+import TodosListItemAdd from "./TodosListItemAdd";
+import TodosListItemInfo from "./TodosListItemInfo";
 export default {
   name: "TodosList",
+  components: {TodosListItemInfo, TodosListItemAdd, TodosListItem},
   data() {
     return {
-      todos: []
+      todos: [],
+      item: {}
     }
   },
   created() {
@@ -39,6 +41,49 @@ export default {
             }
           })
           .catch(err => console.error(err.message))
+    },
+    remove(obj) {
+      if(!confirm("Todo: \"" + obj.text + "\" wirklich löschen")) {
+        return false;
+      }
+      // eslint-disable-next-line no-undef
+      axios.delete("/api/todos/"+obj.id)
+          .then(response => {
+            if(!response.data.error) {
+              this.todos = this.todos.filter(todo => todo !== obj);
+            }
+          })
+          .catch(err => console.error(err.message))
+    },
+    displayInfo(id) {
+      this.item = this.todos.filter(todo => todo.id === id)[0];
+    },
+    addTodos(text) {
+      if(text !== "") {
+        // eslint-disable-next-line no-undef
+        axios.post("/api/todos", {text: text, done: false})
+            .then(response => {
+              if(!response.data.error) {
+                this.todos.push(response.data.data);
+              }
+              document.getElementById("todo-text-input").disabled = false;
+              document.getElementById("todo-text-input").value = "";
+            })
+            .catch(err => console.error(err.message))
+      }
+    },
+    updateTodo(updTodo) {
+      // eslint-disable-next-line no-undef
+      axios.put("/api/todos/"+updTodo.id, updTodo)
+          .then(response => {
+            if(!response.data.error) {
+              const index = this.todos.findIndex(todo => todo.id === updTodo.id);
+              if(index !== -1) {
+                this.todos.splice(index, 1, response.data.data);
+              }
+            }
+          })
+          .catch(err => console.error(err.message))
     }
   }
 }
@@ -46,39 +91,4 @@ export default {
 
 <style scoped>
 
-.done {
-    text-decoration: line-through;
-}
-form {
-    display: flex;
-    width: 100%;
-}
-input[type="checkbox"] {
-    flex: 0.5;
-    margin-left: 1.0rem;
-}
-input[type="text"],
-li span {
-    flex: 10;
-    height: 1.8rem;
-    border: none;
-    margin-left: 1.0rem;
-}
-button {
-    flex: 1;
-}
-li {
-    list-style: none;
-    height: auto;
-    min-height: 2.0rem;
-    line-height: 2.0rem;
-    margin: 5px 10px 0 10px;
-    border: 1px solid #42b983;
-    border-radius: 5px;
-    text-align: left;
-}
-svg[data-icon] {
-    display: inline;
-    margin-right: 5px;
-}
 </style>

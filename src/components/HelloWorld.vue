@@ -9,6 +9,7 @@
 <script>
 /* eslint-disable */
 import Test from "./Test";
+import Default from "./Default";
 
 export default {
   name: 'HelloWorld',
