@@ -1,27 +1,38 @@
 <template>
   <div>
     <TodosListItemAdd :add-todo="addTodos" />
-    <ul v-if="todos.length > 0">
-      <TodosListItem
-          v-for="item in todos"
-          :key="item.id"
-          :item="item"
-          :handleRemove="remove"
-          :displayInfo="displayInfo"
-          :updateTodo="updateTodo"/>
-    </ul>
-    <h3 v-else>Keine Daten vorhanden!</h3>
+    <div class="row">
+      <div class="col">
+        <ul v-if="todos.length > 0">
+          <TodosListItem
+              v-for="item in todos"
+              @removeTodo="remove"
+              :key="item.id"
+              :item="item"
+              :displayInfo="displayInfo"
+              :updateTodo="updateTodo"/>
+        </ul>
+        <!--          :handleRemove="remove"-->
+        <h3 v-else>Keine Daten vorhanden!</h3>
+      </div>
+      <div class="col">
+        <TodosListDone :todos="todos" />
+        <TodosListDone :todos="todos" :is-done="false" />
+      </div>
+    </div>
     <TodosListItemInfo :todo="item" />
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import TodosListItem from "./TodosListItem";
 import TodosListItemAdd from "./TodosListItemAdd";
 import TodosListItemInfo from "./TodosListItemInfo";
+import TodosListDone from "./TodosListDone";
 export default {
   name: "TodosList",
-  components: {TodosListItemInfo, TodosListItemAdd, TodosListItem},
+  components: {TodosListDone, TodosListItemInfo, TodosListItemAdd, TodosListItem},
   data() {
     return {
       todos: [],
@@ -40,7 +51,7 @@ export default {
               this.todos = response.data.data;
             }
           })
-          .catch(err => console.error(err.message))
+          .catch(err => alert(err.response.data.message))
     },
     remove(obj) {
       if(!confirm("Todo: \"" + obj.text + "\" wirklich löschen")) {
@@ -53,7 +64,7 @@ export default {
               this.todos = this.todos.filter(todo => todo !== obj);
             }
           })
-          .catch(err => console.error(err.message))
+          .catch(err => alert(err.response.data.message))
     },
     displayInfo(id) {
       this.item = this.todos.filter(todo => todo.id === id)[0];
@@ -69,10 +80,11 @@ export default {
               document.getElementById("todo-text-input").disabled = false;
               document.getElementById("todo-text-input").value = "";
             })
-            .catch(err => console.error(err.message))
+            .catch(err => alert(err.response.data.message))
       }
     },
     updateTodo(updTodo) {
+      console.log(updTodo);
       // eslint-disable-next-line no-undef
       axios.put("/api/todos/"+updTodo.id, updTodo)
           .then(response => {
@@ -83,7 +95,7 @@ export default {
               }
             }
           })
-          .catch(err => console.error(err.message))
+          .catch(err => alert(err.response.data.message))
     }
   }
 }

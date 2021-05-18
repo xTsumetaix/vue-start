@@ -1,9 +1,17 @@
 <template>
     <li>
       <b-form>
-        <input @change="updateTodo(item)" type="checkbox" v-model="item.done">
-        <span :class="{'done': item.done}" @click="displayInfo(item.id)">{{ item.text}}</span>
-        <b-button class="btn-sm btn-danger float-right del" @click="handleRemove(item)">
+        <input @change="updateTodo(item)"
+               type="checkbox"
+               v-model="item.done">
+        <span>
+          <input @change="updateTodo(item)"
+                 :class="{'done': item.done}"
+                 @click="displayInfo(item.id)"
+                 v-model="item.text" />
+        </span>
+        <b-button class="btn-sm btn-danger float-right del" @click="$emit('removeTodo', item)">
+<!--        <b-button class="btn-sm btn-danger float-right del" @click="handleRemove(item)">-->
           <font-awesome-icon icon="trash-alt"/>
         </b-button>
       </b-form>
@@ -18,10 +26,10 @@ export default {
       type: Object,
       required: true
     },
-    handleRemove: {
-      type: Function,
-
-    },
+    // handleRemove: {
+    //   type: Function,
+    //
+    // },
     displayInfo: {
       type: Function,
     },
@@ -54,6 +62,13 @@ export default {
     border: none;
     margin-left: 1.0rem;
   }
+
+  li span input {
+    height: 1.6rem;
+    border: none;
+    width: 100%;
+  }
+
   button {
     flex: 1;
   }
