@@ -1,9 +1,19 @@
 <template>
     <li>
         <b-form>
-            <input v-model="item.done" type="checkbox" @change="updateTodo(item)">
-
-            <span :class="{'done': item.done}" @click="displayInfo(item.id)">{{ item.text }}</span>
+            <input
+                v-model="item.done"
+                type="checkbox"
+                @change="updateTodo(item)"
+            >
+            <span>
+                <input
+                    :class="{'done': item.done}"
+                    @click="displayInfo(item.id)"
+                    @change="updateTodo(item)"
+                    v-model="item.text"
+                />
+            </span>
 
             <b-button class="btn-sm btn-danger float-right del" @click="$emit('removeTodo',item)">
                 <font-awesome-icon icon="trash-alt"/>
@@ -52,14 +62,17 @@ input[type="text"],
 .done {
     text-decoration: line-through;
 }
-
 li span {
     border: none;
     flex: 10;
     height: 1.8rem;
     margin-left: 1.0rem;
 }
-
+li span input[type="text"] {
+    height: 1.6rem;
+    width: 95%;
+    border: none;
+}
 button {
     flex: 1;
 }

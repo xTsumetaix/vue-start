@@ -17,6 +17,12 @@
     </div>
 </template>
 
+<script>
+export default {
+    name: "App",
+}
+</script>
+
 <style>
 #app {
     color: #2c3e50;
