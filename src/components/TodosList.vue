@@ -6,7 +6,7 @@
                 v-for="item in todos"
                 :key="item.id"
                 :displayInfo="displayInfo"
-                :handleRemove="remove"
+                @removeTodo="remove"
                 :item="item"
                 :updateTodo="updateTodo"/>
         </ul>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import TodosListItem from "./TodosListItem";
 import TodosListItemAdd from "./TodosListItemAdd";
 import TodosListItemInfo from "./TodosListItemInfo";

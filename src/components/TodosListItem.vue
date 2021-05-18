@@ -3,7 +3,7 @@
         <b-form>
             <input v-model="item.done" type="checkbox" @change="updateTodo(item)">
             <span :class="{'done': item.done}" @click="displayInfo(item.id)">{{ item.text }}</span>
-            <b-button class="btn-sm btn-danger float-right del" @click="handleRemove(item)">
+            <b-button class="btn-sm btn-danger float-right del" @click="$emit('removeTodo',item)">
                 <font-awesome-icon icon="trash-alt"/>
             </b-button>
         </b-form>
