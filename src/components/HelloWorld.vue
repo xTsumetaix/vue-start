@@ -1,9 +1,9 @@
 <template>
-  <div class="hello">
-    <h1>Na hallo: {{ msg }}</h1>
-    <p>{{ text }}</p>
-    <Default msg="jetzt kommst du über WelcomeWorld!" />
-  </div>
+    <div class="hello">
+        <h1>Na hallo: {{ msg }}</h1>
+        <p>{{ text }}</p>
+        <Default msg="jetzt kommst du über WelcomeWorld!"/>
+    </div>
 </template>
 
 <script>
@@ -12,14 +12,14 @@ import Test from "./Test";
 import Default from "./Default";
 
 export default {
-  name: 'HelloWorld',
-  components: {Default, Test},
-  props: ['msg', 'text'],
-  /*
-    props: {
-      msg: String
-    }
-  */
+    name: 'HelloWorld',
+    components: {Default, Test},
+    props: ['msg', 'text'],
+    /*
+      props: {
+        msg: String
+      }
+    */
 }
 </script>
 
