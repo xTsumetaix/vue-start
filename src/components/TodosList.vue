@@ -55,7 +55,7 @@ export default {
                         this.todos = this.todos.filter(todo => todo !== obj);
                     }
                 })
-                .catch(err => console.error(err.message))
+                .catch(err => alert(err.response.data.message))
         },
         displayInfo(id) {
             this.item = this.todos.filter(todo => todo.id === id)[0];
