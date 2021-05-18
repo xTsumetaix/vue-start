@@ -45,6 +45,7 @@ export default {
                 .catch(err => console.error(err.message))
         },
         remove(obj) {
+
             if (!confirm("Todo: \"" + obj.text + "\" wirklich löschen")) {
                 return false;
             }
