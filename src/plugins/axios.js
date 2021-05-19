@@ -14,7 +14,7 @@ if(userToken) {
 }
 
 let config = {
-	baseURL: process.env.VUE_APP_APIURL || process.env.apiUrl || ""
+	baseURL: process.env.VUE_APP_API_URL || process.env.apiUrl || ""
 	// timeout: 60 * 1000, // Timeout
 	// withCredentials: true, // Check cross-site Access-Control
 };
