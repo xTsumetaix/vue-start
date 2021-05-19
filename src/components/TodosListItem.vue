@@ -1,99 +1,88 @@
 <template>
     <li>
-        <b-form>
-            <input
-                v-model="item.done"
-                type="checkbox"
-                @change="updateTodo(item)"
-            >
-            <span>
-                <input
-                    type="text"
-                    :class="{'done': item.done}"
-                    @click="displayInfo(item)"
-                    @change="updateTodo(item)"
-                    v-model="item.text"
-                />
-            </span>
-
-            <b-button class="btn-sm btn-danger float-right del" @click="$emit('removeTodo',item)">
-                <font-awesome-icon icon="trash-alt"/>
-            </b-button>
-        </b-form>
+      <b-form>
+        <input @change="updTodo(item)"
+               type="checkbox"
+               v-model="item.done">
+        <span>
+          <input @change="updTodo(item)"
+                 :class="{'done': item.done}"
+                 @click="getTodo(item)"
+                 v-model="item.text" />
+        </span>
+        <b-button class="btn-sm btn-danger float-right del" @click="removeTodo(item)">
+<!--        <b-button class="btn-sm btn-danger float-right del" @click="handleRemove(item)">-->
+          <font-awesome-icon icon="trash-alt"/>
+        </b-button>
+      </b-form>
     </li>
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
-    name: "TodosListItem",
-    props: {
-        item: {
-            type: Object,
-            required: true
-        },
-        handleRemove: {
-            type: Function,
-
-        },
-        updateTodo: {
-            type: Function
-        }
+  name: "TodosListItem",
+  props: {
+    item: {
+      type: Object,
+      required: true
     },
-    methods: {
-        displayInfo(todo) {
-            this.$store.dispatch("todos/getTodo", todo)
-        }
-    }
-
+  },
+  methods: {
+    ...mapActions({
+      getTodo: "todos/displayInfo",
+      removeTodo: "todos/removeTodo",
+      updTodo: "todos/updateTodo"
+    }),
+  }
 }
 </script>
 
 <style scoped>
 
-form {
-    align-items: center;
+  form {
     display: flex;
     width: 100%;
-}
-
-input[type="checkbox"] {
+    align-items: center;
+  }
+  input[type="checkbox"] {
     flex: 0.5;
     margin-left: 1.0rem;
 
-}
-
-input[type="text"],
-.done {
+  }
+  input[type="text"],
+  .done {
     text-decoration: line-through;
-}
-li span {
-    border: none;
+  }
+  li span {
     flex: 10;
     height: 1.8rem;
-    margin-left: 1.0rem;
-}
-li span input[type="text"] {
-    height: 1.6rem;
-    width: 95%;
     border: none;
-}
-button {
-    flex: 1;
-}
+    margin-left: 1.0rem;
+  }
 
-li {
+  li span input {
+    height: 1.6rem;
+    border: none;
+    width: 100%;
+  }
+
+  button {
+    flex: 1;
+  }
+  li {
+    list-style: none;
+    height: auto;
+    min-height: 2.0rem;
+    line-height: 2.0rem;
+    margin: 5px 10px 0 10px;
     border: 1px solid #42b983;
     border-radius: 5px;
-    height: auto;
-    line-height: 2.0rem;
-    list-style: none;
-    margin: 5px 10px 0 10px;
-    min-height: 2.0rem;
     text-align: left;
-}
-
-svg[data-icon] {
+  }
+  svg[data-icon] {
     display: inline;
     margin-right: 5px;
-}
+  }
 </style>

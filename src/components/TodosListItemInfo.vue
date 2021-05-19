@@ -1,77 +1,74 @@
 <template>
-    <div v-if="todo">
-        <table class="table table-striped">
-            <tbody>
-            <tr>
-                <th>
-                    ID
-                </th>
-                <td>
-                    {{ todo.id }}
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    Text
-                </th>
-                <td>
-                    {{ todo.text }}
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    Erledigt
-                </th>
-                <td>
-                    {{ todo.done ? 'Ja' : 'Nein' }}
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    Erstellt
-                </th>
-                <td>
-                    {{ todo.created_at }} Uhr
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+  <div v-if="todo">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            ID
+          </td>
+          <td>
+            {{ todo.id }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Text
+          </td>
+          <td>
+            {{ todo.text }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Erledigt
+          </td>
+          <td>
+            {{ todo.done ? 'Ja' : 'Nein' }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Erstellt
+          </td>
+          <td>
+            {{ todo.created_at }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "TodosListItemInfo",
-    computed: {
-        todo: function () {
-            return this.$store.state.todos.todo
-        }
+  name: "TodosListItemInfo",
+  computed: {
+    todo: function() {
+      return this.$store.state.todos.todo;
     }
-
+  },
 }
 </script>
 
 <style scoped>
-div {
+  div {
     padding-left: 40px;
-}
+  }
 
-table {
+  table {
     /*border: 1px solid #000;*/
     /*border: #42b983;*/
     width: 100%;
-}
+  }
 
-tr th:first-child {
-    width: 200px;
+  tr td:first-child {
     font-weight: bold;
-    text-align: left;
-}
+  }
 
-td {
-    _border: 1px solid #42b983;
+  td {
+    border: 1px solid #42b983;
     padding: 10px;
     padding-left: 25px;
     text-align: left;
-}
+  }
 </style>
