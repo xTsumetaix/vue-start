@@ -25,8 +25,12 @@
 export default {
     name: "App",
     computed: {
-        authCheck: function() { return this.$store.getters["auth/check"] },
-        user: function() { return this.$store.state.auth.user },
+        authCheck: function() {
+            return this.$store.getters["auth/check"]
+        },
+        user: function() {
+            return this.$store.state.auth.user
+        },
     },
     methods: {
         logout() {
