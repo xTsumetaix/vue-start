@@ -1,5 +1,8 @@
 <template>
   <div class="container align-content-center">
+    <div v-if="error">
+      <span class="alert-danger">{{ error }}</span>
+    </div>
     <b-form class="align-self-center m-5" @submit.prevent="login">
       <b-form-group>
         <label for="email">Email: </label>
@@ -16,6 +19,9 @@
 
 <script>
 /* eslint-disable */
+// für globalen aufruf
+// import store from "../store"
+
 export default {
   name: "Login",
   data() {
@@ -26,22 +32,17 @@ export default {
       }
     }
   },
+  computed: {
+    error: function() {
+      return this.$store.state.auth.error
+    }
+  },
   methods: {
     login() {
-      console.log(this.user)
-      axios.post("/api/login", this.user)
-          .then(response => {
-            let userName = response.data.name,
-                userToken = response.data.token;
-            localStorage.setItem('userName', userName);
-            localStorage.setItem('userToken', userToken);
-            if(!response.data.error) {
-              console.log(response.data)
-            }
-          })
-          .catch(err => {
-            alert(err.response.data.errors.email);
-          })
+      // global aufrufen
+      // store.dispatch('auth/login', this.user);
+
+      this.$store.dispatch('auth/login', this.user);
     }
   }
 }

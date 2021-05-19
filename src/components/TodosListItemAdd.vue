@@ -10,22 +10,19 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "TodosListItemAdd",
   methods: {
+    ...mapActions({addTodo: "todos/addTodo"}),
     onSubmit(e) {
       let text = e.target[0].value;
       if(text !== "") {
-        document.getElementById("todo-text-input").disabled = true;
         this.addTodo(text);
       }
     }
   },
-  props: {
-    addTodo: {
-      type: Function,
-    }
-  }
 }
 </script>
 

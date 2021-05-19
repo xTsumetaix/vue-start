@@ -1,18 +1,15 @@
 <template>
   <div>
-    <TodosListItemAdd :add-todo="addTodos" />
+    <TodosListItemAdd />
     <div class="row">
       <div class="col">
         <ul v-if="todos.length > 0">
           <TodosListItem
               v-for="item in todos"
-              @removeTodo="remove"
               :key="item.id"
               :item="item"
-              :displayInfo="displayInfo"
               :updateTodo="updateTodo"/>
         </ul>
-        <!--          :handleRemove="remove"-->
         <h3 v-else>Keine Daten vorhanden!</h3>
       </div>
       <div class="col">
@@ -20,7 +17,7 @@
         <TodosListDone :todos="todos" :is-done="false" />
       </div>
     </div>
-    <TodosListItemInfo :todo="item" />
+    <TodosListItemInfo />
   </div>
 </template>
 
@@ -30,59 +27,26 @@ import TodosListItem from "./TodosListItem";
 import TodosListItemAdd from "./TodosListItemAdd";
 import TodosListItemInfo from "./TodosListItemInfo";
 import TodosListDone from "./TodosListDone";
+import { mapActions } from "vuex";
+
 export default {
   name: "TodosList",
   components: {TodosListDone, TodosListItemInfo, TodosListItemAdd, TodosListItem},
   data() {
     return {
-      todos: [],
       item: {}
     }
   },
   created() {
     this.getTodos();
   },
+  computed: {
+    todos: function() {
+      return this.$store.state.todos.todos;
+    }
+  },
   methods: {
-    getTodos() {
-      // eslint-disable-next-line no-undef
-      axios.get("/api/todos")
-          .then(response => {
-            if(!response.data.error) {
-              this.todos = response.data.data;
-            }
-          })
-          .catch(err => alert(err.response.data.message))
-    },
-    remove(obj) {
-      if(!confirm("Todo: \"" + obj.text + "\" wirklich löschen")) {
-        return false;
-      }
-      // eslint-disable-next-line no-undef
-      axios.delete("/api/todos/"+obj.id)
-          .then(response => {
-            if(!response.data.error) {
-              this.todos = this.todos.filter(todo => todo !== obj);
-            }
-          })
-          .catch(err => alert(err.response.data.message))
-    },
-    displayInfo(id) {
-      this.item = this.todos.filter(todo => todo.id === id)[0];
-    },
-    addTodos(text) {
-      if(text !== "") {
-        // eslint-disable-next-line no-undef
-        axios.post("/api/todos", {text: text, done: false})
-            .then(response => {
-              if(!response.data.error) {
-                this.todos.push(response.data.data);
-              }
-              document.getElementById("todo-text-input").disabled = false;
-              document.getElementById("todo-text-input").value = "";
-            })
-            .catch(err => alert(err.response.data.message))
-      }
-    },
+    ...mapActions({getTodos: "todos/getTodos"}),
     updateTodo(updTodo) {
       console.log(updTodo);
       // eslint-disable-next-line no-undef

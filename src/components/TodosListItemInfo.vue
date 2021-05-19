@@ -1,5 +1,5 @@
 <template>
-  <div v-if="todo.id">
+  <div v-if="todo">
     <table>
       <tbody>
         <tr>
@@ -42,12 +42,11 @@
 <script>
 export default {
   name: "TodosListItemInfo",
-  props: {
-    todo: {
-      type: Object,
-      required: true
-    },
-  }
+  computed: {
+    todo: function() {
+      return this.$store.state.todos.todo;
+    }
+  },
 }
 </script>
 

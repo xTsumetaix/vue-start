@@ -7,10 +7,10 @@
         <span>
           <input @change="updateTodo(item)"
                  :class="{'done': item.done}"
-                 @click="displayInfo(item.id)"
+                 @click="displayInfo(item)"
                  v-model="item.text" />
         </span>
-        <b-button class="btn-sm btn-danger float-right del" @click="$emit('removeTodo', item)">
+        <b-button class="btn-sm btn-danger float-right del" @click="remove(item)">
 <!--        <b-button class="btn-sm btn-danger float-right del" @click="handleRemove(item)">-->
           <font-awesome-icon icon="trash-alt"/>
         </b-button>
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "TodosListItem",
   props: {
@@ -26,15 +28,17 @@ export default {
       type: Object,
       required: true
     },
-    // handleRemove: {
-    //   type: Function,
-    //
-    // },
-    displayInfo: {
-      type: Function,
-    },
     updateTodo: {
       type: Function
+    }
+  },
+  methods: {
+    ...mapActions({getTodo: "todos/displayInfo", removeTodo: "todos/removeTodo"}),
+    displayInfo(todo) {
+      this.getTodo(todo);
+    },
+    remove(todo) {
+      this.removeTodo(todo);
     }
   }
 }
