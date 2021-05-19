@@ -1,6 +1,8 @@
 <template>
     <div class="container align-content-center" @submit.prevent="login">
-        <h3>User: {{ userState.name }} {{ userState.token }}</h3>
+        <div v-if="error">
+            <span class="alert-danger">{{ error }}</span>
+        </div>
         <b-form class="align-self-center m-5">
             <b-form-group>
                 <label for="email">Email: </label>
@@ -30,8 +32,8 @@ export default {
         }
     },
     computed: {
-        userState: function () {
-            return this.$store.state.auth.user
+        error: function () {
+            return this.$store.state.auth.error
         }
     },
     methods: {

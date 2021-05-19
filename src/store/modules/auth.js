@@ -31,25 +31,32 @@ const auth = {
 			localStorage.setItem('userToken', state.user.token)
 			return state.user
 		},
-		mError: function (state, error ) {
+		mLogout: function(state) {
+			state.user.name = null;
+			state.user.email = null;
+			state.user.token = null;
+			localStorage.clear();
+			state.check = false;
+			return state.user;
+		},
+		mError: function (state, error) {
 			state.error = error
 			return state.error
 		}
 	},
 	actions: {
 		login(context, user) {
-			console.info(context)
 			axios.post("/api/login", user)
 				.then(resp => {
 					context.commit('mLogin', resp.data)
 				})
 				.catch(err => {
-					context.commit('mError', err.response.data.errors.email)
+					context.commit('mError', err.response.data.errors.email[0])
 				})
 			;
 		},
-		logout() {
-
+		logout({commit}) {
+			commit('mLogout')
 		}
 	},
 }

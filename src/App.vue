@@ -9,6 +9,7 @@
             |
             <router-link to="/about">About</router-link>
             |
+            <a @click.prevent="logout">Username Logout</a>
             <router-link to="/login">Login</router-link>
         </div>
         <div class="container align-content-center">
@@ -20,6 +21,15 @@
 <script>
 export default {
     name: "App",
+    computed: {
+        authCheck: false,
+        user: null,
+    },
+    methods: {
+        logout() {
+
+        }
+    }
 }
 </script>
 
