@@ -10,7 +10,7 @@
                 <input
                     type="text"
                     :class="{'done': item.done}"
-                    @click="displayInfo(item.id)"
+                    @click="displayInfo(item)"
                     @change="updateTodo(item)"
                     v-model="item.text"
                 />
@@ -35,13 +35,16 @@ export default {
             type: Function,
 
         },
-        displayInfo: {
-            type: Function,
-        },
         updateTodo: {
             type: Function
         }
+    },
+    methods: {
+        displayInfo(todo) {
+
+        }
     }
+
 }
 </script>
 

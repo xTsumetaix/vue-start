@@ -19,7 +19,7 @@
                 <TodosListDone :todos="todos" :is-done="false"/>
             </div>
         </div>
-        <TodosListItemInfo v-if="todo" :todo="todo"/>
+        <TodosListItemInfo />
     </div>
 </template>
 
@@ -29,7 +29,7 @@ import TodosListItem from "./TodosListItem";
 import TodosListItemAdd from "./TodosListItemAdd";
 import TodosListItemInfo from "./TodosListItemInfo";
 import TodosListDone from "./TodosListDone";
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
 
 export default {
     name: "TodosList",
@@ -47,7 +47,7 @@ export default {
     },
     methods: {
         ...mapActions({getTodos: "todos/getTodos"}),
-        remove(obj) {
+        remove(...obj) {
 
             if (!confirm("Todo: \"" + obj.text + "\" wirklich löschen")) {
                 return false;
