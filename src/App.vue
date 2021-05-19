@@ -61,7 +61,7 @@ export default {
 
 #nav a.logout {
     color: #c00;
-    margin-left: 1.0rem;
+    margin-left: 0.5rem;
 }
 
 #nav a.router-link-exact-active {
