@@ -23,8 +23,11 @@ const todos = {
         mAddTodo: function(state, response) {
             state.todos.push(response);
         },
-        mUpdateTodo: function(state, obj) {
-
+        mUpdateTodo: function(state, response) {
+            const index = state.todos.findIndex(todo => todo.id === response.id);
+            if(index !== -1) {
+                this.todos.splice(index, 1, response);
+            }
         },
         mRemoveTodo: function(state, obj) {
             state.todos = state.todos.filter(todo => todo !== obj)
@@ -63,19 +66,17 @@ const todos = {
                     })
             }
         },
-        updateTodo(updTodo) {
-            console.log(updTodo);
+        updateTodo({commit}, updTodo) {
             // eslint-disable-next-line no-undef
             axios.put("/api/todos/"+updTodo.id, updTodo)
                 .then(response => {
                     if(!response.data.error) {
-                        const index = this.todos.findIndex(todo => todo.id === updTodo.id);
-                        if(index !== -1) {
-                            this.todos.splice(index, 1, response.data.data);
-                        }
+                        commit("mUpdateTodo", response.data.data)
                     }
                 })
-                .catch(err => alert(err.response.data.message))
+                .catch(err => {
+                    commit('mError', err.response.data.message);
+                })
         },
         removeTodo({commit}, obj) {
             if(!confirm("Todo: \"" + obj.text + "\" wirklich löschen")) {

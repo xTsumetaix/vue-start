@@ -1,16 +1,16 @@
 <template>
     <li>
       <b-form>
-        <input @change="updateTodo(item)"
+        <input @change="updTodo(item)"
                type="checkbox"
                v-model="item.done">
         <span>
-          <input @change="updateTodo(item)"
+          <input @change="updTodo(item)"
                  :class="{'done': item.done}"
-                 @click="displayInfo(item)"
+                 @click="getTodo(item)"
                  v-model="item.text" />
         </span>
-        <b-button class="btn-sm btn-danger float-right del" @click="remove(item)">
+        <b-button class="btn-sm btn-danger float-right del" @click="removeTodo(item)">
 <!--        <b-button class="btn-sm btn-danger float-right del" @click="handleRemove(item)">-->
           <font-awesome-icon icon="trash-alt"/>
         </b-button>
@@ -28,18 +28,13 @@ export default {
       type: Object,
       required: true
     },
-    updateTodo: {
-      type: Function
-    }
   },
   methods: {
-    ...mapActions({getTodo: "todos/displayInfo", removeTodo: "todos/removeTodo"}),
-    displayInfo(todo) {
-      this.getTodo(todo);
-    },
-    remove(todo) {
-      this.removeTodo(todo);
-    }
+    ...mapActions({
+      getTodo: "todos/displayInfo",
+      removeTodo: "todos/removeTodo",
+      updTodo: "todos/updateTodo"
+    }),
   }
 }
 </script>
