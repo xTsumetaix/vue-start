@@ -18,14 +18,14 @@ export default {
       default: true,
       type: Boolean,
     },
-    todos: {
-      required: true,
-      type: Array
-    },
   },
   computed: {
     displayedTodos: function() {
-      return this.todos.filter(todo => (todo.done === 1) === this.isDone);
+      if(this.isDone) {
+        return this.$store.getters["todos/todosDone"];
+      } else {
+        return this.$store.getters["todos/todosNotDone"]
+      }
     }
   }
 }

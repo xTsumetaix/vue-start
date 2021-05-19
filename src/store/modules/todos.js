@@ -13,7 +13,10 @@ const todos = {
         error: null,
         loading: true
     },
-    getters: {},
+    getters: {
+        todosDone: (state) =>  state.todos.filter(todo => (todo.done === 1)),
+        todosNotDone: (state) =>  state.todos.filter(todo => (todo.done !== 1)),
+    },
     mutations: {
         mLoading: function(state, is_loading) {
             state.loading = is_loading;
@@ -30,7 +33,7 @@ const todos = {
         mUpdateTodo: function(state, response) {
             const index = state.todos.findIndex(todo => todo.id === response.id);
             if(index !== -1) {
-                this.todos.splice(index, 1, response);
+                state.todos.splice(index, 1, response);
             }
         },
         mRemoveTodo: function(state, obj) {
@@ -87,6 +90,7 @@ const todos = {
                     }
                 })
                 .catch(err => {
+                    console.log(err);
                     commit('mError', err.response.data.message);
                     commit("mLoading", false);
                 })

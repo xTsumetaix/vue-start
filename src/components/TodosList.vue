@@ -17,8 +17,8 @@
         <h3 v-else>Keine Daten vorhanden!</h3>
       </div>
       <div class="col">
-        <TodosListDone :todos="todos" />
-        <TodosListDone :todos="todos" :is-done="false" />
+        <TodosListDone />
+        <TodosListDone :is-done="false" />
       </div>
     </div>
     <TodosListItemInfo />
