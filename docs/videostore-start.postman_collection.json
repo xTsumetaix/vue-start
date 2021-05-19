@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "ae967d87-e019-4427-b7c8-1ce9768b792c",
+		"name": "videostore-start",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "admin@test.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://videostore-start.loc/api/login",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "todos index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://videostore-start.loc/api/todos",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "todos show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://videostore-start.loc/api/todos/1",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"todos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "todos store",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "done",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "Das ist die erste Ajax-Anfrage",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://videostore-start.loc/api/todos",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "todos update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "done",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "Das ist die erste Ajax-Anfrage",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://videostore-start.loc/api/todos/1",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"todos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "todos destroy",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://videostore-start.loc/api/todos/10",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"todos",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movies index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://videostore-start.loc/api/movies",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movies update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "author_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Das ist der neue Titel",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://videostore-start.loc/api/movies/27",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"movies",
+						"27"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movies store",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "author_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Das Titel 2",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "11",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://videostore-start.loc/api/movies",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movies destroy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://videostore-start.loc/api/movies/1005",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"movies",
+						"1005"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authors index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://videostore-start.loc/api/authors",
+					"protocol": "http",
+					"host": [
+						"videostore-start",
+						"loc"
+					],
+					"path": [
+						"api",
+						"authors"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "4|Rbu546Gce0hCJItO0OMXGERahKLsP8h74XIL9jLr",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
