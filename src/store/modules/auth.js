@@ -23,6 +23,7 @@ const auth = {
 */
 		// ES6
 		check: state => !!state.user.token,
+		token: state => state.user.token,
 	},
 	mutations: {
 		mLogin: function (state, loginResponse) {

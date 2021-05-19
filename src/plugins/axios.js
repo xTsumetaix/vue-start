@@ -2,17 +2,21 @@
 "use strict";
 import Vue from 'vue';
 import axios from "axios";
-//import store from '../store'
+import store from '../store'
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-let userToken = localStorage.getItem('userToken');
+//let userToken = localStorage.getItem('userToken');
+/*
+let userToken = auth.getters.token
 if(userToken) {
+	alert(userToken)
 	axios.defaults.headers.common['Authorization'] = "Bearer " + userToken;
 }
+*/
 
 let config = {
 	baseURL: process.env.VUE_APP_APIURL || process.env.apiUrl || ""
@@ -25,6 +29,8 @@ const _axios = axios.create(config);
 _axios.interceptors.request.use(
 	function (config) {
 		// Do something before request is sent
+		let token = () => store.getters["auth/token"]
+		console.info(token())
 		return config;
 	},
 	function (error) {

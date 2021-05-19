@@ -41,7 +41,7 @@ export default {
     },
     methods: {
         displayInfo(todo) {
-
+            this.$store.dispatch("todos/getTodo", todo)
         }
     }
 

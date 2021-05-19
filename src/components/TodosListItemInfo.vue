@@ -1,37 +1,37 @@
 <template>
     <div v-if="todo">
-        <table>
+        <table class="table table-striped">
             <tbody>
             <tr>
-                <td>
+                <th>
                     ID
-                </td>
+                </th>
                 <td>
                     {{ todo.id }}
                 </td>
             </tr>
             <tr>
-                <td>
+                <th>
                     Text
-                </td>
+                </th>
                 <td>
                     {{ todo.text }}
                 </td>
             </tr>
             <tr>
-                <td>
+                <th>
                     Erledigt
-                </td>
+                </th>
                 <td>
                     {{ todo.done ? 'Ja' : 'Nein' }}
                 </td>
             </tr>
             <tr>
-                <td>
+                <th>
                     Erstellt
-                </td>
+                </th>
                 <td>
-                    {{ todo.created_at }}
+                    {{ todo.created_at }} Uhr
                 </td>
             </tr>
             </tbody>
@@ -42,6 +42,12 @@
 <script>
 export default {
     name: "TodosListItemInfo",
+    computed: {
+        todo: function () {
+            return this.$store.state.todos.todo
+        }
+    }
+
 }
 </script>
 
@@ -56,12 +62,14 @@ table {
     width: 100%;
 }
 
-tr td:first-child {
+tr th:first-child {
+    width: 200px;
     font-weight: bold;
+    text-align: left;
 }
 
 td {
-    border: 1px solid #42b983;
+    _border: 1px solid #42b983;
     padding: 10px;
     padding-left: 25px;
     text-align: left;

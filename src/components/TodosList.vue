@@ -7,7 +7,6 @@
                     <TodosListItem
                         v-for="item in todos"
                         :key="item.id"
-                        :displayInfo="displayInfo"
                         @removeTodo="remove"
                         :item="item"
                         :updateTodo="updateTodo"/>
