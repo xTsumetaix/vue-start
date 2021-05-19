@@ -1,5 +1,17 @@
+# API Routes
+# Todos
 | POST      | api/todos          | App\Http\Controllers\Api\ApiTodosController@store
 | GET|HEAD  | api/todos          | App\Http\Controllers\Api\ApiTodosController@index
 | GET|HEAD  | api/todos/{todo}   | App\Http\Controllers\Api\ApiTodosController@show
 | PUT|PATCH | api/todos/{todo}   | App\Http\Controllers\Api\ApiTodosController@update
 | DELETE    | api/todos/{todo}   | App\Http\Controllers\Api\ApiTodosController@destroy
+
+# Movies
+GET, HEAD 	api/movies 	        App\Http\Controllers\Api\ApiMovieController@index 	api
+GET, HEAD 	api/movies/{movie} 	App\Http\Controllers\Api\ApiMovieController@show 	api
+POST 	    api/movies 	        App\Http\Controllers\Api\ApiMovieController@store 	api, auth:sanctum
+PUT, PATCH 	api/movies/{movie} 	App\Http\Controllers\Api\ApiMovieController@update 	api, auth:sanctum
+DELETE 	    api/movies/{movie} 	App\Http\Controllers\Api\ApiMovieController@destroy api, auth:sanctum
+
+# Authors
+GET, HEAD 	api/authors 	    App\Http\Controllers\Api\ApiAuthorController@index 	api
