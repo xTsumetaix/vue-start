@@ -1,5 +1,6 @@
 <template>
     <div class="container align-content-center" @submit.prevent="login">
+        <h3>User: {{ userState.name }} {{ userState.token }}</h3>
         <b-form class="align-self-center m-5">
             <b-form-group>
                 <label for="email">Email: </label>
@@ -16,6 +17,8 @@
 
 <script>
 /* eslint-disable */
+//import store from "../store"
+
 export default {
     name: "Login",
     data() {
@@ -26,19 +29,16 @@ export default {
             },
         }
     },
+    computed: {
+        userState: function () {
+            return this.$store.state.auth.user
+        }
+    },
     methods: {
         login() {
-            axios.post("/api/login", this.user)
-                .then(resp => {
-                    let userName = resp.data.name,
-                        userToken = resp.data.token;
-                    localStorage.setItem('userName', userName)
-                    localStorage.setItem('userToken', userToken)
-                })
-                .catch(err => {
-                    alert(err.response.data.errors.email)
-                })
-            ;
+            // store global aufrufen
+            this.$store.dispatch('auth/login', this.user)
+            //store.dispatch('auth/login', this.user)
         }
     }
 }
