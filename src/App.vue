@@ -9,8 +9,11 @@
             |
             <router-link to="/about">About</router-link>
             |
-            <a @click.prevent="logout">Username Logout</a>
-            <router-link to="/login">Login</router-link>
+            <a v-if="authCheck" @click.prevent="logout" class="logout">
+                <font-awesome-icon icon="user" />
+                {{ user.name }} Logout
+            </a>
+            <router-link v-else to="/login">Login</router-link>
         </div>
         <div class="container align-content-center">
             <router-view/>
@@ -22,12 +25,12 @@
 export default {
     name: "App",
     computed: {
-        authCheck: false,
-        user: null,
+        authCheck: this.$store.getters["auth/check"],
+        user: this.$store.state.auth.user,
     },
     methods: {
         logout() {
-
+            this.$store.dispatch("auth/logout")
         }
     }
 }
@@ -49,6 +52,12 @@ export default {
 #nav a {
     color: #2c3e50;
     font-weight: bold;
+    cursor: pointer;
+}
+
+#nav a.logout {
+    color: #c00;
+    margin-left: 1.0rem;
 }
 
 #nav a.router-link-exact-active {
