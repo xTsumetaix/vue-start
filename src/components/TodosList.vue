@@ -19,7 +19,7 @@
                 <TodosListDone :todos="todos" :is-done="false"/>
             </div>
         </div>
-        <TodosListItemInfo :todo="item"/>
+        <TodosListItemInfo v-if="todo" :todo="todo"/>
     </div>
 </template>
 
@@ -29,30 +29,24 @@ import TodosListItem from "./TodosListItem";
 import TodosListItemAdd from "./TodosListItemAdd";
 import TodosListItemInfo from "./TodosListItemInfo";
 import TodosListDone from "./TodosListDone";
+import {mapActions} from "vuex";
 
 export default {
     name: "TodosList",
     components: {TodosListDone, TodosListItemInfo, TodosListItemAdd, TodosListItem},
-    data() {
-        return {
-            todos: [],
-            item: {}
+    computed: {
+        todos: function () {
+            return this.$store.state.todos.todos
+        },
+        todo: function () {
+            return this.$store.state.todos.todo
         }
     },
     created() {
-        this.getTodos();
+        this.getTodos()
     },
     methods: {
-        getTodos() {
-            // eslint-disable-next-line no-undef
-            axios.get("/api/todos")
-                .then(response => {
-                    if (!response.data.error) {
-                        this.todos = response.data.data;
-                    }
-                })
-                .catch(err => console.error(err.message))
-        },
+        ...mapActions({getTodos: "todos/getTodos"}),
         remove(obj) {
 
             if (!confirm("Todo: \"" + obj.text + "\" wirklich löschen")) {
