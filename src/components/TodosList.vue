@@ -2,7 +2,10 @@
   <div>
     <TodosListItemAdd />
     <div class="row">
-      <div class="col">
+      <div v-if="loading" class="col">
+        <h2>Bitte Warten</h2>
+      </div>
+      <div v-else class="col">
         <ul v-if="todos.length > 0">
           <TodosListItem
               v-for="item in todos"
@@ -43,6 +46,9 @@ export default {
   computed: {
     todos: function() {
       return this.$store.state.todos.todos;
+    },
+    loading: function() {
+      return this.$store.state.todos.loading;
     }
   },
   methods: {

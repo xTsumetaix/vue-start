@@ -10,10 +10,14 @@ const todos = {
     state: {
         todos: [],
         todo: null,
-        error: null
+        error: null,
+        loading: true
     },
     getters: {},
     mutations: {
+        mLoading: function(state, is_loading) {
+            state.loading = is_loading;
+        },
         mGetTodos: function(state, response) {
             state.todos = response;
         },
@@ -38,15 +42,18 @@ const todos = {
     },
     actions: {
         getTodos({commit}) {
+            commit("mLoading", true);
             // eslint-disable-next-line no-undef
             axios.get("/api/todos")
                 .then(response => {
                     if(!response.data.error) {
                         commit('mGetTodos', response.data.data);
+                        commit("mLoading", false);
                     }
                 })
                 .catch(err => {
                     commit('mError', err.response.data.message);
+                    commit("mLoading", false);
                 })
         },
         displayInfo({commit}, todo) {
@@ -54,43 +61,52 @@ const todos = {
         },
         addTodo({commit}, text) {
             if(text !== "") {
+                commit("mLoading", true);
                 // eslint-disable-next-line no-undef
                 axios.post("/api/todos", {text: text, done: false})
                     .then(response => {
                         if(!response.data.error) {
                             commit('mAddTodo', response.data.data);
+                            commit("mLoading", false);
                         }
                     })
                     .catch(err => {
                         commit('mError', err.response.data.message);
+                        commit("mLoading", false);
                     })
             }
         },
         updateTodo({commit}, updTodo) {
+            commit("mLoading", true);
             // eslint-disable-next-line no-undef
             axios.put("/api/todos/"+updTodo.id, updTodo)
                 .then(response => {
                     if(!response.data.error) {
                         commit("mUpdateTodo", response.data.data)
+                        commit("mLoading", false);
                     }
                 })
                 .catch(err => {
                     commit('mError', err.response.data.message);
+                    commit("mLoading", false);
                 })
         },
         removeTodo({commit}, obj) {
             if(!confirm("Todo: \"" + obj.text + "\" wirklich löschen")) {
                 return false;
             }
+            commit("mLoading", true);
             // eslint-disable-next-line no-undef
             axios.delete("/api/todos/"+obj.id)
                 .then(response => {
                     if(!response.data.error) {
                         commit("mRemoveTodo", obj);
+                        commit("mLoading", false);
                     }
                 })
                 .catch(err => {
                     commit('mError', err.response.data.message);
+                    commit("mLoading", false);
                 })
         },
     },
