@@ -4,6 +4,7 @@
     <div class="row">
       <div v-if="loading" class="col">
         <h2>Bitte Warten</h2>
+        <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
       </div>
       <div v-else class="col">
         <ul v-if="todos.length > 0">
@@ -31,13 +32,16 @@ import TodosListItemAdd from "./TodosListItemAdd";
 import TodosListItemInfo from "./TodosListItemInfo";
 import TodosListDone from "./TodosListDone";
 import { mapActions } from "vuex";
+import PulseLoader from "vue-spinner/src/PulseLoader"
 
 export default {
   name: "TodosList",
-  components: {TodosListDone, TodosListItemInfo, TodosListItemAdd, TodosListItem},
+  components: {TodosListDone, TodosListItemInfo, TodosListItemAdd, TodosListItem, PulseLoader},
   data() {
     return {
-      item: {}
+      item: {},
+      color: "#42b983",
+      size: "14px"
     }
   },
   created() {
